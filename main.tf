@@ -58,8 +58,14 @@ resource "aws_route_table" "public_rt" {
 }
 
 resource "aws_route_table_association" "public_1_rt_a" {
-  subnet_id      = [ "aws_subnet.my_public_subnet1.id" , "aws_subnet.my_public_subnet2.id" ]
+  subnet_id      = aws_subnet.my_public_subnet1.id
   route_table_id = aws_route_table.public_rt.id
+}
+
+resource "aws_route_table_association" "public_1_rt_b" {
+  subnet_id      = aws_subnet.my_public_subnet2.id
+  route_table_id = aws_route_table.public_rt.id
+
 }
 
 resource "aws_security_group" "web_sg" {
@@ -102,14 +108,6 @@ resource "aws_instance" "web_instance1" {
   vpc_security_group_ids      = [aws_security_group.web_sg.id]
   associate_public_ip_address = true
 
-  user_data = <<-EOF
-  #!/bin/bash -ex
-
-  sudo apt-get update -y
-  sudo apt-get install apache2 -y
-  sudo systemctl start apache2
-  sudo systemctl enable apache2
-  EOF
 
   tags = {
     "Name" : "web_instance1"
@@ -125,14 +123,7 @@ resource "aws_instance" "web_instance2" {
   vpc_security_group_ids      = [aws_security_group.web_sg.id]
   associate_public_ip_address = true
 
-  user_data = <<-EOF
-  #!/bin/bash -ex
 
-  sudo apt-get update -y
-  sudo apt-get install apache2 -y
-  sudo systemctl start apache2
-  sudo systemctl enable apache2
-  EOF
 
   tags = {
     "Name" : "web_instance2"
