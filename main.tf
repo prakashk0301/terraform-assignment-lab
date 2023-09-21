@@ -109,6 +109,7 @@ resource "aws_instance" "web_instance1" {
   sudo apt-get install apache2 -y
   sudo systemctl start apache2
   sudo systemctl enable apache2
+  EOF
 
   tags = {
     "Name" : "web_instance1"
@@ -131,6 +132,7 @@ resource "aws_instance" "web_instance2" {
   sudo apt-get install apache2 -y
   sudo systemctl start apache2
   sudo systemctl enable apache2
+  EOF
 
   tags = {
     "Name" : "web_instance2"
