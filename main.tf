@@ -100,9 +100,9 @@ resource "aws_security_group" "web_sg" {
 }
 
 resource "aws_instance" "web_instance1" {
-  ami           = "ami-04e601abe3e1a910f"
-  instance_type = "t2.nano"
-  key_name      = "devops-june"
+  ami           = "${var.aws_ami}"
+  instance_type = "${var.instance_type}"
+  key_name      = "${var.aws_key}" 
 
   subnet_id                   = aws_subnet.my_public_subnet1.id
   vpc_security_group_ids      = [aws_security_group.web_sg.id]
@@ -115,9 +115,9 @@ resource "aws_instance" "web_instance1" {
 }
 
 resource "aws_instance" "web_instance2" {
-  ami           = "ami-04e601abe3e1a910f"
-  instance_type = "t2.nano"
-  key_name      = "devops-june"
+  ami           = "${var.aws_ami}"
+  instance_type = "${var.instance_type}"
+  key_name      = "${var.aws_key}" 
 
   subnet_id                   = aws_subnet.my_public_subnet2.id
   vpc_security_group_ids      = [aws_security_group.web_sg.id]
