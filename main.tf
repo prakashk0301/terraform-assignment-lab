@@ -1,6 +1,6 @@
 provider "aws" {
   profile = "default"
-  region  = "us-east-1"
+  region  = "eu-central-1"
 }
 
 resource "aws_vpc" "some_custom_vpc" {
