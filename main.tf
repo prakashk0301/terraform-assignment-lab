@@ -102,12 +102,12 @@ resource "aws_security_group" "web_sg" {
 resource "aws_instance" "web_instance1" {
   ami           = "${var.aws_ami}"
   instance_type = "${var.instance_type}"
-  key_name      = "${var.aws_key}" 
+  key_name      = "${var.aws_key}"
 
   subnet_id                   = aws_subnet.my_public_subnet1.id
   vpc_security_group_ids      = [aws_security_group.web_sg.id]
   associate_public_ip_address = true
-
+  user_data = "${file("user-data.sh")}"
 
   tags = {
     "Name" : "web_instance1"
@@ -117,12 +117,12 @@ resource "aws_instance" "web_instance1" {
 resource "aws_instance" "web_instance2" {
   ami           = "${var.aws_ami}"
   instance_type = "${var.instance_type}"
-  key_name      = "${var.aws_key}" 
+  key_name      = "${var.aws_key}"
 
   subnet_id                   = aws_subnet.my_public_subnet2.id
   vpc_security_group_ids      = [aws_security_group.web_sg.id]
   associate_public_ip_address = true
-
+  user_data = "${file("user-data.sh")}"
 
 
   tags = {
